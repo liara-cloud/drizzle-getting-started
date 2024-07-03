@@ -1,9 +1,9 @@
-import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const todoTable = pgTable('todo_table', {
   id: serial('id').primaryKey(),
   text: text('text').notNull(),
-  done: integer('done').default(0),
+  done: boolean('done').default(false),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 

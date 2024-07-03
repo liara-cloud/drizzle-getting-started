@@ -1,3 +1,4 @@
+// src/components/Todos.tsx
 import { useState, useEffect } from 'react';
 import Todo from './Todo';
 import AddTodo from './AddTodo';
@@ -16,12 +17,22 @@ const Todos = () => {
     fetchTodos();
   }, []);
 
+  const activeTodos = todos.filter(todo => !todo.done);
+  const doneTodos = todos.filter(todo => todo.done);
+
   return (
     <div>
       <AddTodo onAdd={fetchTodos} />
+      <h2>Active Todos</h2>
       <div>
-        {todos.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
+        {activeTodos.map((todo) => (
+          <Todo key={todo.id} todo={todo} onUpdate={fetchTodos} onDelete={fetchTodos} />
+        ))}
+      </div>
+      <h2>Done Todos</h2>
+      <div>
+        {doneTodos.map((todo) => (
+          <Todo key={todo.id} todo={todo} onUpdate={fetchTodos} onDelete={fetchTodos} />
         ))}
       </div>
     </div>
